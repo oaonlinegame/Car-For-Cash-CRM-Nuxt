@@ -42,58 +42,24 @@ export default defineNuxtConfig({
       theme: {
         defaultTheme: "light",
         themes: {
-          // 1. โหมดสว่าง
           light: {
             dark: false,
             colors: {
-              primary: "#FF6600",
-              background: "#F5F5F5",
-              surface: "#FFFFFF",
+              primary: "#1976D2",
+              background: "#F0F2F5", // ปรับพื้นหลังให้เป็นเทาอ่อนที่เห็นชัดว่าไม่ใช่สีขาว
+              surface: "#FFFFFF", // ให้ Card เป็นสีขาวบริสุทธิ์
+              info: "#00CAE3",
+              success: "#4CAF50",
+              warning: "#FB8C00",
+              error: "#FF5252",
             },
           },
-          // 2. โหมดถนอมสายตา (เพิ่มตัวนี้เข้าไป)
-          sepia: {
-            dark: false,
-            colors: {
-              primary: "#795548",
-              background: "#F4ECD8",
-              surface: "#FBFAF3",
-            },
-          },
-          // 3. โหมดมืด
           dark: {
             dark: true,
             colors: {
-              primary: "#FF8533",
-              background: "#121212",
-              surface: "#1E1E1E",
-            },
-          },
-          // 4. โหมดน้ำเงินหรู
-          midnight: {
-            dark: true,
-            colors: {
-              primary: "#58A6FF",
-              background: "#0D1117",
-              surface: "#161B22",
-            },
-          },
-          // 5. โหมดเขียวป่าไม้
-          forest: {
-            dark: true,
-            colors: {
-              primary: "#81C784",
-              background: "#1B2E1B",
-              surface: "#263F26",
-            },
-          },
-          // 6. โหมดไซเบอร์
-          cyber: {
-            dark: true,
-            colors: {
-              primary: "#F06292",
-              background: "#2B1B2B",
-              surface: "#3D263D",
+              primary: "#2196F3",
+              background: "#0F172A", // พื้นหลังมืดแบบน้ำเงินเข้ม
+              surface: "#1E293B", // Card มืด
             },
           },
         },

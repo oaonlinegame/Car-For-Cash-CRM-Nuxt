@@ -1,9 +1,5 @@
 <template>
-  <v-app>
+  <NuxtLayout>
     <NuxtPage />
-  </v-app>
+  </NuxtLayout>
 </template>
-
-<script setup>
-// Somwang CRM Layout
-</script>
