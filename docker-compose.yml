@@ -1,0 +1,30 @@
+services:
+  app:
+    # ใช้ Node.js เวอร์ชันล่าสุด (LTS) แบบ Alpine เพื่อให้เบาเครื่อง
+    image: node:22-alpine
+    
+    # ตั้งชื่อ Container จะได้จำง่ายๆ
+    container_name: nuxt4-dev
+    
+    # โฟลเดอร์ทำงานข้างใน Container
+    working_dir: /app
+    
+    # สำคัญ!: ตั้งให้ Server รับ Connection จากข้างนอกได้
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      # ถ้าใช้ Nuxt 4 features บางทีต้องระบุให้ชัดเจน
+      - NUXT_TELEMETRY_DISABLED=1 
+    
+    # Map Port 3000 ใน Docker ออกมาที่เครื่องเรา
+    ports:
+      - "3000:3000"
+    
+    # หัวใจสำคัญ: Map ไฟล์ในเครื่องเรา (.) เข้าไปใน /app ใน Docker
+    # เวลาเราแก้โค้ดใน Ubuntu ตัว Docker จะเห็นด้วยทันที
+    volumes:
+      - ./:/app
+      - /app/node_modules # กันไม่ให้ node_modules ตีกันระหว่างเครื่องจริงกับ Docker
+    
+    # คำสั่งรัน: ลง library ก่อน แล้วค่อย start dev server
+    command: sh -c "npm install && npm run dev"

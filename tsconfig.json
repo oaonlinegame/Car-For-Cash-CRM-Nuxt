@@ -1,0 +1,21 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": false,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./app/*"],
+      "@/*": ["./app/*"],
+      "dexie": ["./node_modules/dexie"]
+    }
+  },
+  "include": [
+    "app/**/*",
+    ".nuxt/nuxt.d.ts"
+  ]
+}
