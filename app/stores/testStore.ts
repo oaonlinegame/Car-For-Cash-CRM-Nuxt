@@ -1,13 +1,13 @@
-// app/stores/testStore.ts
 import { defineStore } from "pinia";
 
-export const useTestStore = defineStore("test", {
+export const useTestStore = defineStore("testStore", {
   state: () => ({
-    counter: 0, // ตัวแปรสำหรับนับเลข
+    testStatus: "พร้อมใช้งาน" as string,
   }),
   actions: {
-    increment() {
-      this.counter++;
+    // ลบ function increment() หรือ counter ทิ้งถ้ามี
+    setTestStatus(val: string) {
+      this.testStatus = val;
     },
   },
 });

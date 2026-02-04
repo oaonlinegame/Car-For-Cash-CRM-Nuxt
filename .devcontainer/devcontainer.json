@@ -1,0 +1,10 @@
+{
+    "name": "nuxt-crm",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/app",
+    "extensions": [
+        "Vue.volar",
+        "ms-vscode.vscode-typescript-next"
+    ]
+}

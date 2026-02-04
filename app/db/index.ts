@@ -1,4 +1,4 @@
-import Dexie from 'dexie';
+import Dexie from "dexie";
 
 export interface Lead {
   id?: number;
@@ -13,10 +13,10 @@ export class MyDatabase extends Dexie {
   leads!: Dexie.Table<Lead, number>; // 👈 แบบนี้
 
   constructor() {
-    super('CRM_Database');
+    super("CRM_Database");
 
     super.version(1).stores({
-      leads: '++id, name, phone, status'
+      leads: "++id, name, phone, status, createdAt",
     });
   }
 }

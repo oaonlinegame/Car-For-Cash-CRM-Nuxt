@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-
+  srcDir: "app/",
   modules: ["vuetify-nuxt-module", "@pinia/nuxt"],
 
   router: {

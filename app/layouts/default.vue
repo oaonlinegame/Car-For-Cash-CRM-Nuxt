@@ -1,129 +1,103 @@
 <template>
   <v-app>
-    <v-navigation-drawer 
-      v-model="drawer" 
+    <!-- ================= Sidebar ================= -->
+    <v-navigation-drawer
+      v-model="drawer"
       :rail="rail"
       permanent
-      @click="rail = false"
       elevation="2"
-      class="border-none"
+      class="main-sidebar"
     >
-      <v-list-item
-        prepend-avatar="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-circle.png" 
-        title="Car Cash CRM"
-        subtitle="ระบบสินเชื่อรถยนต์"
-        class="py-4"
-        nav
-      >
-        <template v-slot:append>
-          <v-btn
-            icon="mdi-chevron-left"
-            variant="text"
-            size="small"
-            @click.stop="rail = !rail"
-          ></v-btn>
-        </template>
-      </v-list-item>
+      <!-- Brand Header -->
+      <div class="brand-header" :class="{ 'rail-mode': rail }">
+        <div class="brand-logo">
+          <v-avatar color="primary" variant="tonal" size="40" rounded="lg">
+            <v-icon icon="mdi-car-convertible" size="24" color="primary" />
+          </v-avatar>
+        </div>
 
-      <v-divider></v-divider>
+        <div class="brand-text">
+          <div class="text-h6 font-weight-black text-truncate">Car Cash</div>
+          <div
+            class="text-caption font-weight-bold text-primary"
+            style="letter-spacing: 2px"
+          >
+            CRM SYSTEM
+          </div>
+        </div>
 
-      <v-list density="compact" nav>
-        
-        <v-list-item 
-          prepend-icon="mdi-view-dashboard-outline" 
-          title="Dashboard" 
-          to="/"
-          color="primary"
-          class="mb-1"
-        ></v-list-item>
+        <!-- Toggle Sidebar -->
+      </div>
 
-        <v-list-subheader v-if="!rail" class="text-caption font-weight-bold mt-4 mb-2">งานสินเชื่อ</v-list-subheader>
-        
-        <v-list-item 
-          prepend-icon="mdi-account-group-outline" 
-          title="ลูกค้าทั้งหมด (Leads)" 
-          to="/test-lab"
-          color="primary"
-        ></v-list-item>
+      <v-divider />
 
-        <v-list-item 
-          prepend-icon="mdi-file-document-edit-outline" 
-          title="เปิดใบคำขอใหม่" 
-          link
-          color="primary"
-        ></v-list-item>
-
-        <v-list-item 
-          prepend-icon="mdi-calculator-variant-outline" 
-          title="คำนวณค่างวด" 
-          link
-          color="primary"
-        ></v-list-item>
-
-        <v-list-subheader v-if="!rail" class="text-caption font-weight-bold mt-4 mb-2">รายงาน & ติดตาม</v-list-subheader>
-        
-        <v-list-item 
-          prepend-icon="mdi-chart-box-outline" 
-          title="สรุปยอดประจำเดือน" 
-          link
-        ></v-list-item>
-
-         <v-list-item 
-          prepend-icon="mdi-calendar-clock-outline" 
-          title="นัดหมายวันนี้" 
-          link
-          append-icon="mdi-circle-small text-error"
-        ></v-list-item>
-
-      </v-list>
-
-      <template v-slot:append>
-        <v-divider></v-divider>
+      <!-- Menu -->
+      <v-list density="compact" nav class="mt-2">
         <v-list-item
-          lines="two"
-          prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-          title="คุณสมชาย ใจดี"
-          subtitle="เจ้าหน้าที่สินเชื่อ"
-          class="py-3"
-        >
-          <template v-slot:append>
-             <v-btn icon="mdi-logout" variant="text" size="small" color="error"></v-btn>
-          </template>
-        </v-list-item>
-      </template>
+          prepend-icon="mdi-view-dashboard-outline"
+          title="Dashboard"
+          to="/"
+          rounded="lg"
+        />
+        <v-list-item
+          prepend-icon="mdi-flask-outline"
+          title="Test Lab"
+          to="/test-lab"
+          rounded="lg"
+        />
+      </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar elevation="0" border class="bg-surface">
+    <!-- ================= App Bar ================= -->
+    <v-app-bar elevation="0" border class="main-app-bar">
+      <v-btn
+        icon
+        variant="text"
+        size="small"
+        color="medium-emphasis"
+        @click.stop="toggleRail"
+      >
+        <v-icon>
+          {{ rail ? "mdi-chevron-right" : "mdi-chevron-left" }}
+        </v-icon>
+      </v-btn>
+
       <v-app-bar-title class="font-weight-bold text-primary">
-        สาขาสิงห์บุรี <span class="text-caption text-medium-emphasis ml-2">| Online</span>
+        สาขาสิงห์บุรี
+        <span class="text-caption text-medium-emphasis ml-2">| Online</span>
       </v-app-bar-title>
 
-      <v-spacer></v-spacer>
+      <!-- Search -->
+
+      <v-spacer />
 
       <div class="d-flex align-center gap-2 mr-2">
-        
-        <v-btn icon class="mr-1">
-          <v-badge content="3" color="error" dot>
+        <v-btn icon>
+          <v-badge dot color="error">
             <v-icon>mdi-bell-outline</v-icon>
           </v-badge>
         </v-btn>
 
-        <v-btn 
-          icon 
-          @click="toggleTheme" 
-          variant="tonal" 
+        <!-- Theme Toggle -->
+        <v-btn
+          icon
+          variant="tonal"
+          @click="toggleTheme"
           :color="currentTheme === 'dark' ? 'warning' : 'primary'"
-          class="ml-2"
         >
-          <v-icon>{{ currentTheme === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent' }}</v-icon>
-          <v-tooltip activator="parent" location="bottom">
-            {{ currentTheme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด' }}
-          </v-tooltip>
+          <v-icon>
+            {{
+              currentTheme === "dark"
+                ? "mdi-white-balance-sunny"
+                : "mdi-moon-waning-crescent"
+            }}
+          </v-icon>
         </v-btn>
       </div>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-4">
+    <!-- ================= Main ================= -->
+    <v-main class="main-content">
       <v-container fluid class="pa-6">
         <slot />
       </v-container>
@@ -132,33 +106,119 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useTheme } from 'vuetify'
+const drawer = ref(true);
+const rail = useState<boolean>("drawer-rail", () => false);
 
-const drawer = ref(true)
-const rail = ref(false) // State ควบคุม Mini Variant (ย่อแถบเมนู)
-const theme = useTheme()
+const toggleRail = () => {
+  rail.value = !rail.value;
+};
 
-const currentTheme = computed(() => theme.global.name.value)
+// ===== Theme =====
+const theme = useTheme();
+const currentTheme = computed(() => theme.global.name.value);
 
 const toggleTheme = () => {
-  theme.global.name.value = theme.global.name.value === 'dark' ? 'light' : 'dark'
-}
+  theme.global.name.value =
+    theme.global.name.value === "dark" ? "light" : "dark";
+};
 </script>
 
 <style scoped>
-/* ปรับแต่ง Scrollbar ให้สวยงาม */
+/* ======================================================
+  Scrollbar
+====================================================== */
 ::-webkit-scrollbar {
   width: 6px;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
-}
 ::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
+  background: #9e9e9e;
   border-radius: 4px;
 }
-.v-theme--dark .bg-grey-lighten-4 {
-  background-color: #0f1214 !important; /* พื้นหลัง Dark mode ให้เข้มขึ้น */
+
+/* ======================================================
+  Light Mode
+====================================================== */
+.main-sidebar {
+  background: #ffffff;
+  transition: width 0.25s ease;
+}
+
+.main-app-bar {
+  background: #ffffff;
+}
+
+.main-content {
+  background: #f4f6f8;
+}
+
+/* ======================================================
+  Dark Mode
+====================================================== */
+.v-theme--dark .main-sidebar {
+  background: #111827; /* navy dark */
+  color: #e5e7eb;
+  border-right: 1px solid #1f2937;
+}
+
+.v-theme--dark .main-app-bar {
+  background: #0f172a;
+}
+
+.v-theme--dark .main-content {
+  background: #020617;
+}
+
+/* ======================================================
+  Brand Header
+====================================================== */
+.brand-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  transition: all 0.2s ease;
+}
+
+.brand-text {
+  margin-left: 12px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.toggle-btn {
+  margin-left: auto;
+}
+
+/* Rail Mode */
+.brand-header.rail-mode {
+  justify-content: center;
+  padding: 0;
+}
+
+.brand-header.rail-mode .brand-text,
+.brand-header.rail-mode .toggle-btn {
+  opacity: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* ======================================================
+  Menu
+====================================================== */
+.v-list-item--nav {
+  margin-bottom: 4px;
+}
+
+.v-theme--dark .v-list-item--nav {
+  color: #d1d5db;
+}
+
+.v-theme--dark .v-list-item--nav:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.v-theme--dark .v-list-item--active {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.25), transparent);
 }
 </style>
